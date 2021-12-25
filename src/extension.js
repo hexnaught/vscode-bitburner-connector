@@ -269,4 +269,3 @@ const sanitizeUserConfig = () => {
     fwEnabled: fwVal
   };
 };
-
