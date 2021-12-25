@@ -247,18 +247,26 @@ module.exports = {
 
 const sanitizeUserConfig = () => {
   const userConfig = vscode.workspace.getConfiguration(`bitburner`);
+  const fwInspect = vscode.workspace.getConfiguration('bitburner').inspect('fileWatcher.enable');
+  const fwVal = fwInspect.workspaceValue || fwInspect.workspaceFolderValue || fwInspect.defaultValue; // Only accepts values from workspace or folder level configs
+
+  if(fwInspect.globalValue) {
+    vscode.window.showErrorMessage(
+      `Warning: You have enabled the bitburner filewatcher in your global (user) settings, the extension will default to workspace or folder settings instead.`
+    );
+  }
 
   // Checks if initializing or user config changed for fileWatcher.enabled
   if(sanitizedUserConfig === undefined || 
-     sanitizedUserConfig.fwEnabled !== userConfig.get(`fileWatcher.enable`)) {
-      fwEnabled = userConfig.get(`fileWatcher.enable`)
+     sanitizedUserConfig.fwEnabled !== fwVal) {
+      fwEnabled = fwVal;
   }
 
   sanitizedUserConfig = {
     scriptRoot: `${userConfig.get(`scriptRoot`)}/`
       .replace(/^\./, ``)
       .replace(/\/*$/, `/`),
-    fwEnabled: userConfig.get(`fileWatcher.enable`)
+    fwEnabled: fwVal
   };
 };
 

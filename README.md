@@ -20,7 +20,7 @@ This is currently disabled by default, the behaviour is - It will push all files
 
 You can change the directory being watching with the `bitburner.scriptRoot` settng within the plugin configuration, open VSCode preferences to modify the value - default as `./` (workspace root).
 
-You can enable the fileWatcher by default with the `bitburner.fileWatcher.enable` setting within the plugin configuration. If you have this extension enabled globally **DO NOT** enable this option in user settings (workspace and folder only), it may try to push unintended files to bitburner if the filepath matches.
+You can enable the fileWatcher by default with the `bitburner.fileWatcher.enable` setting within the plugin configuration. This setting will not work if set in user settings, it must be set at the workspace or folder level.
 
 **NOTE: You can only watch paths within the workspace VSCode has open.**
 
