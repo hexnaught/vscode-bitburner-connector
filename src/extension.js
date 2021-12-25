@@ -16,7 +16,7 @@ const BB_GAME_CONFIG = {
  * @type vscode.FileSystemWatcher
  */
 let fsWatcher;
-let fwEnabled = false;
+let fwEnabled;
 
 let sanitizedUserConfig;
 
@@ -30,6 +30,10 @@ function activate(context) {
   const disposableCommands = [];
 
   sanitizeUserConfig();
+
+  if(fwEnabled) {
+    initFileWatcher(sanitizedUserConfig.scriptRoot);
+  }
 
   const configChangeListener = vscode.workspace.onDidChangeConfiguration(() => {
     sanitizeUserConfig();
@@ -244,9 +248,17 @@ module.exports = {
 const sanitizeUserConfig = () => {
   const userConfig = vscode.workspace.getConfiguration(`bitburner`);
 
+  // Checks if initializing or user config changed for fileWatcher.enabled
+  if(sanitizedUserConfig === undefined || 
+     sanitizedUserConfig.fwEnabled !== userConfig.get(`fileWatcher.enable`)) {
+      fwEnabled = userConfig.get(`fileWatcher.enable`)
+  }
+
   sanitizedUserConfig = {
     scriptRoot: `${userConfig.get(`scriptRoot`)}/`
       .replace(/^\./, ``)
       .replace(/\/*$/, `/`),
+    fwEnabled: userConfig.get(`fileWatcher.enable`)
   };
 };
+
