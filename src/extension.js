@@ -316,7 +316,7 @@ const sanitizeUserConfig = () => {
   }
 
   // Checks if initializing or user config changed for fileWatcher.enabled
-  if (!sanitizedUserConfig || sanitizedUserConfig.fwEnabled !== fwVal) {
+  if (!sanitizedUserConfig || !userConfig.get(`authToken`) || sanitizedUserConfig.fwEnabled !== fwVal) {
     fwEnabled = fwVal;
   }
 

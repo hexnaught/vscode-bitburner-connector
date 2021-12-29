@@ -16,6 +16,7 @@ _This is an early WIP with a few hours gone in to both the extension and the gam
 | File Watcher - Enable | `bitburner.fileWatcher.enable` | A configuration option that is only read from the Workspace or Folder configurations, a way to enable the File Watcher by default. | `false` |
 | Show File Push Notifications | `bitburner.showPushSuccessNotification` | If true, this will show a notification/toast when a file has been successfully pushed to the game. Errors will always show. | `false` |
 | Show File Watcher Enabled Notifications | `bitburner.showFileWatcherEnabledNotification` | If true, this will show a notification/toast whenever the File Watcher is enabled and/or the extension configuration scriptRoot has changed. Errors will always show. | `false` |
+| Game Authentication Token | `bitburner.authToken` | The auth token that the game generates, needed for you to be able to push files in to your game client. See [#authentication](#authentication) section below. | (No Default) |
 
 ## Pushing Files
 
