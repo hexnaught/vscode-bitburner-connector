@@ -1,5 +1,7 @@
 # Bitburner Connector for VSCode
 
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
 This extension allows for you to have all of your scripts on your host machine and push them to the running game client!
 
 _**Note: The extension currently works with the 'dev' branch of the game. (as of 28th December 2021)**_
@@ -17,17 +19,33 @@ _This is an early WIP with a few hours gone in to both the extension and the gam
 
 ## Pushing Files
 
-### Through the context menu
+### Authentication
+
+When the game is started for the first time, it generates an 'Auth Token' that can be used by third party programs/applications/scripts to push files to the game. This extension **requires** that token to in order to function.
+
+You can copy the token from the Bitburner application 'API Server' context menu:
+
+![Image showing API Server context menu in the bitburner game client](https://raw.githubusercontent.com/hexnaught/vscode-bitburner-connector/assets/images/bit-burner-menu-auth-token.png)
+
+#### Adding the token to the extension:
+
+The token will ultimately end up in the workspace configuration (See your workspaces`./.vscode/settings.json`), so you can either:
+
+- Add the token manually to the workspace `settings.json` to the key of `bitburner.authToken`.
+- Use the command palette (CTRL/CMD + SHIFT + P) and select `Bitburner: Add Auth Token`.
+  - Paste the Auth Token copied via the games context menu in to the input box.
+
+### Push through the context menu
 
 - Right Click in the VSCode Editor (Your source code) and choose 'Bitburner: Push file to game'
 
-### Through the command palette
+### Push through the command palette
 
 - Open the Command Palette (CTRL/CMD + SHIFT + P)
   - Choose 'Bitburner: Push File To The Game' to save and push a single file (File open in editor)
   - Choose 'Bitburner: Push All Files To The Game' to push all files from your configured `scriptRoot`.
 
-### With the file watcher (Disabled by default)
+### Push With the file watcher (Disabled by default)
 
 - Open the Command Palette (CTRL/CMD + SHIFT + P)
   - Enable with 'Bitburner: Enable File Watcher'
